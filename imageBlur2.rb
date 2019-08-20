@@ -1,4 +1,4 @@
-class  Image
+class Image
 	def initialize(img)
 		@img = img
 	end
