@@ -101,15 +101,19 @@ function longestPalindrome(s) {
 	for (let i = 0; i < len; i++) {
 		for (let j = len; j > i; j--) {
 			// No need to check shorter lengths
-			if (Math.abs(i - j) <= longestLen) continue;
+			if (j - i <= longestLen) continue;
 
 			let sub = s.substring(i, j);
-			if (checkPalindrome(sub) && sub.length > longestLen) longestLen = sub.length;
+			if (checkPalindrome(sub)) longestLen = sub.length;
 		}
 	}
 	return longestLen;
 }
 
 function checkPalindrome(str) {
-	return str == reverseString(str);
+	let len = str.length - 1;
+	for (let i = 0; i < len / 2; i++) {
+		if (str[i] != str[len - i]) return false;
+	}
+	return true;
 }
