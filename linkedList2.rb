@@ -40,7 +40,7 @@ def print_values(list_node)
 	end
 end
 
-def reverse_list(list_node, previous=nil)
+def reverse_list(list_node)
 	stack = Stack.new
 
 	while list_node
@@ -52,6 +52,20 @@ def reverse_list(list_node, previous=nil)
 	return stack.data
 end
 
+# Determines if a linked list has a cycle
+def isCyclical?(list_node)
+	slow = list_node
+	fast = list_node
+
+	# Checks if the node exists and has a next node
+	while fast != nil && fast.next_node != nil do
+		slow = slow.next_node
+		fast = fast.next_node.next_node
+		return true if slow == fast
+	end
+	return false
+end
+
 
 node1 = LinkedListNode.new(37)
 node2 = LinkedListNode.new(99, node1)
@@ -60,9 +74,11 @@ node3 = LinkedListNode.new(12, node2)
 # 12 --> 99 --> 37 --> nil
 print_values(node3)
 
-puts "-------"
+# puts "-------"
 
 node3 = reverse_list(node3)
 
 # 37 --> 99 --> 12 --> nil
 print_values(node3)
+
+puts(isCyclical?(node3))
